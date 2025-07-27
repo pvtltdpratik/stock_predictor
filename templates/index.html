@@ -1,273 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Price Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            background-color: #f8f9fa;
-        }
-        .chart-container {
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin-bottom: 30px;
-        }
-        .navbar {
-            margin-bottom: 30px;
-        }
-        .footer {
-            margin-top: 50px;
-            padding: 20px;
-            background-color: #e9ecef;
-            text-align: center;
-            border-radius: 10px;
-        }
-        h2 {
-            color: #343a40;
-            margin-bottom: 20px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stock Price Dashboard</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e9f5ff, #f0fff5);
+      color: #333;
+    }
+
+    .navbar {
+      background: linear-gradient(to right, #0d6efd, #6610f2);
+    }
+
+    .navbar-brand, .nav-link {
+      font-weight: 600;
+      color: #fff !important;
+    }
+
+    .navbar-toggler {
+      border: none;
+    }
+
+    .navbar-toggler-icon {
+      filter: invert(1);
+    }
+
+    h1, h2 {
+      font-weight: 600;
+    }
+
+    .form-select {
+      border-radius: 10px;
+      border-color: #ced4da;
+      box-shadow: none;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .form-select:hover {
+      box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
+    }
+
+    .chart-container {
+      background-color: #ffffff;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      padding: 30px;
+      margin-bottom: 40px;
+      transition: transform 0.3s;
+    }
+
+    .chart-container:hover {
+      transform: translateY(-3px);
+    }
+
+    .footer {
+      margin-top: 50px;
+      padding: 20px;
+      background-color: #dee2e6;
+      text-align: center;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    .footer p {
+      margin: 0;
+    }
+
+    .text-primary {
+      color: #0d6efd !important;
+    }
+  </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Stock Dashboard</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
+  <nav class="navbar navbar-expand-lg shadow-sm">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <h1 class="text-center mb-4 text-primary">Live Stock Price & Prediction</h1>
-
-                <div class="mb-4">
-                    <label for="stockSelect" class="form-label fs-5">Select Stock:</label>
-                    <select class="form-select form-select-lg" id="stockSelect">
-                        <option selected disabled>Choose...</option>
-                        <option value="AAPL">Apple (AAPL)</option>
-                        <option value="MSFT">Microsoft (MSFT)</option>
-                        <option value="GOOGL">Alphabet (GOOGL)</option>
-                        <option value="AMZN">Amazon (AMZN)</option>
-                    </select>
-                </div>
-
-                <div class="chart-container">
-                    <h2 class="text-center">Current Stock Price</h2>
-                    <canvas id="currentStockChart"></canvas>
-                </div>
-
-                <div class="chart-container">
-                    <h2 class="text-center">Predicted Stock Price</h2>
-                    <canvas id="predictedStockChart"></canvas>
-                </div>
-            </div>
-        </div>
+      <a class="navbar-brand" href="#">📊 Stock Dashboard</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+        </ul>
+      </div>
     </div>
+  </nav>
 
-    <footer class="footer">
-        <p>&copy; 2025 Stock Dashboard. All rights reserved.</p>
-    </footer>
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <h1 class="text-center mb-5 text-primary"> Live Stock Price & AI Prediction</h1>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Placeholder data for demonstration
-        const stockData = {
-            "AAPL": {
-                current: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                    prices: [150, 155, 160, 158, 165, 170]
-                },
-                predicted: {
-                    labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    prices: [172, 175, 180, 182, 185, 190]
-                }
-            },
-            "MSFT": {
-                current: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                    prices: [280, 285, 290, 288, 295, 300]
-                },
-                predicted: {
-                    labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    prices: [302, 305, 310, 312, 315, 320]
-                }
-            },
-            "GOOGL": {
-                current: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                    prices: [100, 102, 105, 103, 108, 110]
-                },
-                predicted: {
-                    labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    prices: [112, 115, 118, 120, 122, 125]
-                }
-            },
-            "AMZN": {
-                current: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                    prices: [120, 122, 125, 123, 128, 130]
-                },
-                predicted: {
-                    labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    prices: [132, 135, 138, 140, 142, 145]
-                }
-            }
-        };
+        <div class="mb-4">
+          <label for="stockSelect" class="form-label fs-5">Select Stock:</label>
+          <select class="form-select form-select-lg" id="stockSelect">
+            <option selected disabled>Choose...</option>
+            <option value="AAPL">Apple (AAPL)</option>
+            <option value="MSFT">Microsoft (MSFT)</option>
+            <option value="GOOGL">Alphabet (GOOGL)</option>
+            <option value="AMZN">Amazon (AMZN)</option>
+          </select>
+        </div>
 
-        let currentStockChart;
-        let predictedStockChart;
+        <div class="chart-container">
+          <h2 class="text-center text-dark">Current Stock Price</h2>
+          <canvas id="currentStockChart"></canvas>
+        </div>
 
-        function updateCharts(stockSymbol) {
-            const data = stockData[stockSymbol];
+        <div class="chart-container">
+          <h2 class="text-center text-dark">Predicted Stock Price</h2>
+          <canvas id="predictedStockChart"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
 
-            if (!data) {
-                console.error("Stock data not found for:", stockSymbol);
-                return;
-            }
+  <footer class="footer shadow-sm">
+    <p>&copy; 2025 Stock Dashboard. Crafted with ❤️ for investors & analysts.</p>
+  </footer>
 
-            // Destroy existing charts if they exist
-            if (currentStockChart) {
-                currentStockChart.destroy();
-            }
-            if (predictedStockChart) {
-                predictedStockChart.destroy();
-            }
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-            // Current Stock Price Chart
-            const ctxCurrent = document.getElementById('currentStockChart').getContext('2d');
-            currentStockChart = new Chart(ctxCurrent, {
-                type: 'line',
-                data: {
-                    labels: data.current.labels,
-                    datasets: [{
-                        label: 'Current Price',
-                        data: data.current.prices,
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: false,
-                            title: {
-                                display: true,
-                                text: 'Price ($)'
-                            }
-                        },
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Month'
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return context.dataset.label + ': $' + context.raw;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Predicted Stock Price Chart
-            const ctxPredicted = document.getElementById('predictedStockChart').getContext('2d');
-            predictedStockChart = new Chart(ctxPredicted, {
-                type: 'line',
-                data: {
-                    labels: data.predicted.labels,
-                    datasets: [{
-                        label: 'Predicted Price',
-                        data: data.predicted.prices,
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        y: {
-                            beginAtZero: false,
-                            title: {
-                                display: true,
-                                text: 'Price ($)'
-                            }
-                        },
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Month'
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top',
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return context.dataset.label + ': $' + context.raw;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
+  <!-- Chart Logic -->
+  <script>
+    const stockData = {
+      "AAPL": {
+        current: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+          prices: [150, 155, 160, 158, 165, 170]
+        },
+        predicted: {
+          labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          prices: [172, 175, 180, 182, 185, 190]
         }
+      },
+      "MSFT": {
+        current: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+          prices: [280, 285, 290, 288, 295, 300]
+        },
+        predicted: {
+          labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          prices: [302, 305, 310, 312, 315, 320]
+        }
+      },
+      "GOOGL": {
+        current: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+          prices: [100, 102, 105, 103, 108, 110]
+        },
+        predicted: {
+          labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          prices: [112, 115, 118, 120, 122, 125]
+        }
+      },
+      "AMZN": {
+        current: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+          prices: [120, 122, 125, 123, 128, 130]
+        },
+        predicted: {
+          labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          prices: [132, 135, 138, 140, 142, 145]
+        }
+      }
+    };
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const stockSelect = document.getElementById('stockSelect');
+    let currentStockChart;
+    let predictedStockChart;
 
-            stockSelect.addEventListener('change', (event) => {
-                const selectedStock = event.target.value;
-                if (selectedStock !== 'Choose...') {
-                    updateCharts(selectedStock);
+    function updateCharts(stockSymbol) {
+      const data = stockData[stockSymbol];
+
+      if (!data) {
+        console.error("Stock data not found for:", stockSymbol);
+        return;
+      }
+
+      if (currentStockChart) currentStockChart.destroy();
+      if (predictedStockChart) predictedStockChart.destroy();
+
+      const ctxCurrent = document.getElementById('currentStockChart').getContext('2d');
+      currentStockChart = new Chart(ctxCurrent, {
+        type: 'line',
+        data: {
+          labels: data.current.labels,
+          datasets: [{
+            label: 'Current Price',
+            data: data.current.prices,
+            borderColor: 'rgba(75, 192, 192, 1)',
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderWidth: 2,
+            fill: true,
+            tension: 0.3
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: false,
+              title: { display: true, text: 'Price ($)' }
+            },
+            x: {
+              title: { display: true, text: 'Month' }
+            }
+          },
+          plugins: {
+            legend: { display: true, position: 'top' },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return context.dataset.label + ': $' + context.raw;
                 }
-            });
+              }
+            }
+          }
+        }
+      });
 
-            // Optionally, load a default stock on page load
-            // stockSelect.value = "AAPL";
-            // updateCharts("AAPL");
-        });
-    </script>
+      const ctxPredicted = document.getElementById('predictedStockChart').getContext('2d');
+      predictedStockChart = new Chart(ctxPredicted, {
+        type: 'line',
+        data: {
+          labels: data.predicted.labels,
+          datasets: [{
+            label: 'Predicted Price',
+            data: data.predicted.prices,
+            borderColor: 'rgba(255, 99, 132, 1)',
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderWidth: 2,
+            fill: true,
+            tension: 0.3
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: false,
+              title: { display: true, text: 'Price ($)' }
+            },
+            x: {
+              title: { display: true, text: 'Month' }
+            }
+          },
+          plugins: {
+            legend: { display: true, position: 'top' },
+            tooltip: {
+              callbacks: {
+                label: function(context) {
+                  return context.dataset.label + ': $' + context.raw;
+                }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const stockSelect = document.getElementById('stockSelect');
+
+      stockSelect.addEventListener('change', (event) => {
+        const selectedStock = event.target.value;
+        if (selectedStock !== 'Choose...') {
+          updateCharts(selectedStock);
+        }
+      });
+
+      // Load default stock optionally
+      // stockSelect.value = "AAPL";
+      // updateCharts("AAPL");
+    });
+  </script>
 </body>
 </html>
