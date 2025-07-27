@@ -21,80 +21,113 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
-      body {
-        font-family: "Poppins", sans-serif;
-        background: linear-gradient(135deg, #e9f5ff, #f0fff5);
-        color: #333;
-      }
+  * {
+    box-sizing: border-box;
+  }
 
-      body::-webkit-scrollbar {
-        display: none;
-      }
+  body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #e9f5ff, #f0fff5);
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
 
-      .navbar {
-        background: linear-gradient(to right, #0d6efd, #6610f2);
-      }
+  /* Hide scrollbar but allow scrolling */
+  body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 
-      .navbar-brand,
-      .nav-link {
-        font-weight: 600;
-        color: #fff !important;
-      }
+  .navbar {
+    background: linear-gradient(to right, #0d6efd, #6610f2); /* Consistent across files */
+  }
 
-      .navbar-toggler {
-        border: none;
-      }
+  .navbar-brand,
+  .nav-link {
+    font-weight: 600;
+    color: #fff !important;
+  }
 
-      .navbar-toggler-icon {
-        filter: invert(1);
-      }
+  .nav-link.active {
+    border-bottom: 2px solid #ffffff;
+  }
 
-      h1,
-      h2 {
-        font-weight: 600;
-      }
+  .navbar-toggler {
+    border: none;
+  }
 
-      .form-select {
-        border-radius: 10px;
-        border-color: #ced4da;
-        box-shadow: none;
-        transition: all 0.3s ease-in-out;
-      }
+  .navbar-toggler-icon {
+    filter: invert(1);
+  }
 
-      .form-select:hover {
-        box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
-      }
+  /* Drop-down & Form Selects */
+  .form-select {
+    border-radius: 10px;
+    border-color: #ced4da;
+    box-shadow: none;
+    transition: all 0.3s ease-in-out;
+  }
 
-      .chart-container {
-        background-color: #ffffff;
-        border-radius: 20px;
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-        padding: 30px;
-        margin-bottom: 40px;
-        transition: transform 0.3s;
-      }
+  .form-select:hover {
+    box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
+  }
 
-      .chart-container:hover {
-        transform: translateY(-3px);
-      }
+  /* Chart Card Container */
+  .chart-container {
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    padding: 30px;
+    margin-bottom: 40px;
+    transition: transform 0.3s;
+  }
 
-      .footer {
-        margin-top: 50px;
-        padding: 20px;
-        background-color: #dee2e6;
-        text-align: center;
-        border-radius: 10px;
-        font-size: 14px;
-      }
+  .chart-container:hover {
+    transform: translateY(-3px);
+  }
 
-      .footer p {
-        margin: 0;
-      }
+  /* Footer */
+  .footer {
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #dee2e6;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 14px;
+  }
 
-      .text-primary {
-        color: #0d6efd !important;
-      }
-    </style>
+  .footer p {
+    margin: 0;
+  }
+
+  .text-primary {
+    color: #0d6efd !important;
+  }
+
+  /* About page specific */
+  .about-section {
+    padding: 60px 20px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #0d6efd;
+    margin-bottom: 20px;
+  }
+
+  .section-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+  }
+</style>
+
   </head>
   <body>
     <nav
@@ -116,10 +149,12 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto me-3 d-flex gap-4">
             <li class="nav-item">
-              <a class="nav-link text-white fw-semibold" href="#">Home</a>
+              <a class="nav-link text-white fw-semibold active" href="index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white fw-semibold" href="#">About</a>
+              <a class="nav-link text-white fw-semibold" href="About.html"
+                >About</a
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link text-white fw-semibold" href="#">Contact</a>
